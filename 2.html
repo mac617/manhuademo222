@@ -1,0 +1,23 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+print "Content-type:text/html"
+print                               # 空行，告诉服务器结束头部
+
+import cgi
+import re
+import urllib
+
+url = "http://www.92mh.cc/search/%E5%88%83%E7%89%99%E9%81%93/"
+def getHtml(url):
+    page = urllib.urlopen(url)
+    html = page.read()
+    imglist = re.findall('<a class="imgbox" href="(.*?)" title="(.*?)".*?<img src="(.*?.jpg)".*?<p class="note">(.*?)</p>', html ,re.S)
+    return imglist
+
+
+htmls = getHtml(url)
+haha = htmls[0]
+
+for html in htmls:
+	print html[0]
